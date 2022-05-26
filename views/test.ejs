@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('partials/header') %>
+
+  <body>
+    <%- include('partials/navbar') %>
+
+    <div class="container card questioncontainer">
+      <span class="timer_count"
+        ><h3 id="Timer">120:00</h3>
+        <h4 class="timer_heading">Timeleft!</h4></span
+      >
+      <div id="question-container">
+        <h2 id="question">Question</h2>
+        <div class="btn-grid card-body" id="answer-buttons">
+          <div class="form-check">
+            <input
+              class="form-check-input answer"
+              type="radio"
+              name="flexRadioDefault"
+              id="A"
+            />
+            <label class="form-check-label" for="ans1" id="options1">
+              Option 1
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input answer"
+              type="radio"
+              name="flexRadioDefault"
+              id="B"
+            />
+            <label class="form-check-label" for="ans2" id="options2">
+              Option 2
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input answer"
+              type="radio"
+              name="flexRadioDefault"
+              id="C"
+            />
+            <label class="form-check-label" for="ans3" id="options3">
+              Option 3
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="controls">
+        <!-- <button id="start-btn" class="btn btn-success btn-start">Start</button> -->
+        <div>
+          <button id="next-btn" class="btn btn-primary btn-next">Next</button>
+          <div id="showScore" class="ScoreArea"></div>
+        </div>
+      </div>
+    </div>
+
+    <%- include('partials/footer') %>
+  </body>
+</html>
+
+<script>
+  //these are some queries to use data in front-end🖼️ otherwise might have used a framework 🚀
+  //Now the Good solution🏓,
+  //I know but had to do what tool 🎽 I got or just something did alright!🧵🧶
+
+  const questionElement = document.getElementById("question");
+  const answerElemnt1 = document.getElementById("options1");
+  const answerElemnt2 = document.getElementById("options2");
+  const answerElemnt3 = document.getElementById("options3");
+  const NextButton = document.getElementById("next-btn");
+  const answers = document.querySelectorAll(".answer");
+
+  const showScore = document.getElementById(".showScore");
+
+  // const StartButton = document.getElementById("start-btn");
+  const questioncontainer = document.getElementById("question-container");
+
+  let questionCount = 0;
+  let score = 0;
+
+  const deselect = () => {
+    answers.forEach((currentElm) => {
+      currentElm.checked = false;
+    });
+  };
+
+  async function getData() {
+    const response = await fetch("http://localhost:5000/testData");
+    let data = await response.json();
+
+    questionElement.innerText = data[questionCount].Question;
+    answerElemnt1.innerText = data[questionCount].Option1;
+    answerElemnt2.innerText = data[questionCount].Option2;
+    answerElemnt3.innerText = data[questionCount].Option3;
+    NextButton.addEventListener("click", () => {
+      const checkedAnswer = getCheckAnswer();
+      console.log(checkedAnswer);
+      if (checkedAnswer == data[questionCount].CorrectOption) {
+        score++;
+      }
+      console.log(score);
+
+      let datalength = data.length;
+      questionCount++;
+
+      deselect();
+
+      if (questionCount < datalength) {
+        getData();
+      } else {
+        showScore.innerHTML = `
+        <h3> Your Score ${score}/${data.length} </h3>
+        <button class="btn btn-success" onclick='location.reload()'>safd</button>
+        `;
+      }
+    });
+  }
+  getData();
+
+  const getCheckAnswer = () => {
+    let answer;
+    answers.forEach((currentAns) => {
+      if (currentAns.checked) {
+        answer = currentAns.id;
+      }
+    });
+    return answer;
+  };
+
+  const startingTime = 120;
+  let time = startingTime * 60;
+  const countTimer = document.getElementById("Timer");
+
+  setInterval(updateTimber, 1000);
+
+  function updateTimber() {
+    const minutes = Math.floor(time / 60);
+    let seconds = time % 60;
+
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+    countTimer.innerHTML = `${minutes}:${seconds} `;
+    time--;
+    if (minutes == 00 && seconds == 00) {
+      location.reload();
+    }
+  }
+
+  // }
+
+  // const data3 = fetch("http://localhost:5000/testData")
+  //   .then((res) => (data = res.json()))
+  //   .then((data) => {
+  //     console.log(data);
+  //     return data;
+
+  //     // data.map((loadedQuestions) => {
+  //     //   showQuestion(loadedQuestions.Question);
+  //     //   showAnswers(
+  //     //     loadedQuestions.Option1,
+  //     //     loadedQuestions.Option2,
+  //     //     loadedQuestions.Option3
+  //     //   );
+  //     // });
+  //   });
+
+  // StartButton.addEventListener("click", startGame);
+  // function answerCheck() {
+  //   NextButton.classList.remove("hide");
+  //   console.log("hello");
+  // }
+  // function startGame() {
+  //   console.log("game started");
+  //   StartButton.classList.add("hide");
+  //   questioncontainer.classList.remove("hide");
+  //   setnextQuestion();
+  // }
+
+  // function showQuestion(question) {
+  //   questionElement.innerHTML = question;
+  // }
+  // function showAnswers(option1, option2, option3) {
+  //   answerElemnt1.innerHTML = option1;
+  //   answerElemnt2.innerHTML = option2;
+  //   answerElemnt3.innerHTML = option3;
+  //   answerElemnt1.value = option1;
+  //   answerElemnt2.value = option2;
+  //   answerElemnt3.value = option3;
+
+  //   console.log(answerElemnt1.value);
+  // }
+  // function setnextQuestion() {}
+  // function selectAnswer() {}
+</script>

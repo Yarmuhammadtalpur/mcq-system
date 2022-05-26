@@ -1,0 +1,102 @@
+:root {
+  --hue-nuetral: 200;
+  --red: #f24c4c;
+  --green: #14c38e;
+}
+
+.page404 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.page404_heading {
+  font-size: 11rem;
+  margin-bottom: -2rem;
+  margin-top: -2rem;
+  font-family: "Poppins", sans-serif;
+}
+.page404_sub_heading2 {
+  font-family: "Source Sans Pro", sans-serif;
+}
+.page404_sub_heading {
+  margin-top: -6rem;
+
+  font-family: "Source Sans Pro", sans-serif;
+}
+.home404 {
+  font-size: 1.6rem;
+  margin-bottom: 3rem;
+}
+.iconsize {
+  height: 2rem;
+}
+
+.b-example-divider {
+  height: 3rem;
+  border-width: 1px 0;
+}
+.correct_opt {
+  border-color: #14c38e;
+}
+.correctOption {
+  background-color: #14c38e;
+  color: #14c38e;
+}
+.correctans {
+  color: #035397;
+}
+.container {
+  margin-top: 10%;
+  padding: 2rem;
+}
+.questioncontainer {
+  display: flex;
+  font-size: 1.2rem;
+  width: 50%;
+}
+
+.controls {
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+.card.wrong {
+  background-color: var(--red);
+}
+
+.btn.correct {
+  background-color: var(--green);
+  color: black;
+}
+
+.btn.wrong {
+  background-color: var(--red);
+}
+.btn-start,
+.btn-next {
+  font-size: 1.2rem;
+  padding: 0.8rem 2.2rem;
+}
+.hide {
+  display: none;
+}
+.attention {
+  color: rgb(29, 29, 29);
+}
+.timer_count {
+  background-color: #f1f0c0;
+  border-radius: 10px;
+  padding: 0.5rem 2rem;
+  width: 40%;
+  display: flex;
+  align-items: baseline;
+}
+.timer_heading {
+  color: #14c38e;
+  margin-left: 12px;
+}
+#Timer {
+  color: #6a67ce;
+}

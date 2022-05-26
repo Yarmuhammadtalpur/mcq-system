@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('partials/header') %>
+
+  
+    <body>
+      
+      <%- include('partials/navbar') %>
+      <div class="container">
+        <div class="py-5 text-center">
+          <img
+            class="d-block mx-auto mb-4"
+            src="/public/images/ideas.png"
+            alt=""
+            width="72"
+            height="57"
+          />
+          <h2>Add Questions with Mutliple Options</h2>
+        </div>
+
+        <form method="post">
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Enter the Question</label>
+            <input type="text" name="Question"  required class="form-control" autocomplete="__away">
+          </div>
+          <div class="row mb-3">
+            <div class="col">
+              <label for="option1" class="form-label">Option 1 (A)</label>
+              <input type="text" name="option1"  required id="option1" class="form-control" placeholder="option 1" autocomplete="none">
+            </div>
+            <div class="col">
+              <label for="option2" class="form-label">Option 2 (B)</label>
+              <input type="text" name="option2"  required id="option2" class="form-control" placeholder="option 2" autocomplete="none">
+            </div>
+            <div class="col">
+              <label for="option3" class="form-label">Option 3 (C)</label>
+              <input type="text" name="option3"  required id="option3" class="form-control" placeholder="option 3" autocomplete="none">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <label for="correctoption" class="form-label">Enter the correct option</label>
+              <input type="text" id="correctoption" name="correctOption"  required class="form-control correct_opt" placeholder="Correct Option" autocomplete="none">
+              <p class="attention">Please Enter the A, B or C not whole answer</p>
+            </div>
+          </div>
+
+          <div class="b-example-divider"></div>
+          
+          <button type="submit" class="btn btn-primary" value="submit">Submit</button>
+        </form>
+        
+    <%- include('partials/footer') %>
+    </body>
+</html>
